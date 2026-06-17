@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 
 <style>
+
 body{
     margin:0;
     background:transparent;
@@ -11,132 +12,253 @@ body{
     font-family:'Segoe UI',sans-serif;
 }
 
+
 #container{
+
     position:absolute;
     right:30px;
     top:30px;
 
+    width:260px;
+    height:250px;
+
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:flex-start;
 
     color:white;
+
 }
+
+
 
 #giftImage{
+
     width:180px;
     height:180px;
+
     object-fit:contain;
 
+    flex-shrink:0;
+
     animation:float 2s ease-in-out infinite;
+
 }
+
+
 
 #action{
-    margin-top:10px;
 
-    font-size:28px;
-    font-weight:700;
+    margin-top:2px;
+
+    width:260px;
+    height:60px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:32px;
+    font-weight:900;
+
+    letter-spacing:1px;
 
     text-shadow:
-        0 0 5px #000,
-        0 0 10px #000,
-        0 0 15px #000;
+    0 0 4px #000,
+    0 0 8px #000,
+    0 0 12px #000,
+    0 0 18px rgba(255,255,255,0.4);
 
     text-align:center;
+
+    line-height:1.1;
+
 }
+
+
 
 .fade{
-    animation:fade .4s;
+
+    animation:fade .8s ease;
+
 }
+
+
 
 @keyframes fade{
-    from{
+
+    0%{
+
         opacity:0;
-        transform:translateY(10px);
+
+        transform:scale(.85);
+
     }
-    to{
+
+
+    100%{
+
         opacity:1;
-        transform:translateY(0);
+
+        transform:scale(1);
+
     }
+
 }
 
+
+
 @keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
 }
+
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div id="container">
+
     <img id="giftImage">
+
     <div id="action"></div>
+
 </div>
+
+
 
 <script>
 
+
 const gifts = [
+
+
 {
 image:"heartme.png",
 action:"Totem"
 },
+
+
 {
 image:"loveyousomuch.png",
-action:"EGApple/diamond"
+action:"EG Apple & Diamond"
 },
+
+
 {
 image:"rose.png",
 action:"Random Mobs"
 },
+
+
 {
 image:"tiktok.png",
 action:"TNT"
 },
+
+
 {
 image:"icecrean.png",
 action:"Creeper"
 },
+
+
 {
 image:"overreact.png",
-action:"charge creeper"
+action:"Charged Creeper"
 },
+
+
 {
 image:"fingerheart.png",
 action:"Arrow Rain"
 },
+
+
 {
 image:"doughnut.png",
 action:"Random PIT"
 },
+
+
 {
 image:"hearts.png",
-action:"No Movement 15 sec"
+action:"No Movement 15 Sec"
 }
+
+
 ];
+
+
 
 let current = 0;
 
+
+
 function updateGift(){
+
 
 const gift = gifts[current];
 
-document.getElementById("giftImage").src = gift.image;
-document.getElementById("action").textContent = gift.action;
+
+const img = document.getElementById("giftImage");
+
+const text = document.getElementById("action");
 
 const container = document.getElementById("container");
 
+
+
 container.classList.remove("fade");
+
 void container.offsetWidth;
+
+
+
+img.src = gift.image;
+
+text.textContent = gift.action;
+
+
+
 container.classList.add("fade");
 
+
+
 current = (current + 1) % gifts.length;
+
+
 }
 
+
+
 updateGift();
+
+
 setInterval(updateGift,3000);
 
+
+
 </script>
+
 
 </body>
 </html>
