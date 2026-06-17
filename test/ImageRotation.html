@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<style>
+body{
+    margin:0;
+    background:transparent;
+    overflow:hidden;
+    font-family:'Segoe UI',sans-serif;
+}
+
+#container{
+    position:absolute;
+    right:30px;
+    top:30px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    color:white;
+}
+
+#giftImage{
+    width:180px;
+    height:180px;
+    object-fit:contain;
+
+    animation:float 2s ease-in-out infinite;
+}
+
+#action{
+    margin-top:10px;
+
+    font-size:28px;
+    font-weight:700;
+
+    text-shadow:
+        0 0 5px #000,
+        0 0 10px #000,
+        0 0 15px #000;
+
+    text-align:center;
+}
+
+.fade{
+    animation:fade .4s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+    <img id="giftImage">
+    <div id="action"></div>
+</div>
+
+<script>
+
+const gifts = [
+{
+image:"heartme.png",
+action:"Totem"
+},
+{
+image:"loveyousomuch.png",
+action:"EGApple/diamond"
+},
+{
+image:"rose.png",
+action:"Random Mobs"
+},
+{
+image:"tiktok.png",
+action:"TNT"
+},
+{
+image:"icecrean.png",
+action:"Creeper"
+},
+{
+image:"overreact.png",
+action:"charge creeper"
+},
+{
+image:"fingerheart.png",
+action:"Arrow Rain"
+},
+{
+image:"doughnut.png",
+action:"Random PIT"
+},
+{
+image:"hearts.png",
+action:"No Movement 15 sec"
+}
+];
+
+let current = 0;
+
+function updateGift(){
+
+const gift = gifts[current];
+
+document.getElementById("giftImage").src = gift.image;
+document.getElementById("action").textContent = gift.action;
+
+const container = document.getElementById("container");
+
+container.classList.remove("fade");
+void container.offsetWidth;
+container.classList.add("fade");
+
+current = (current + 1) % gifts.length;
+}
+
+updateGift();
+setInterval(updateGift,3000);
+
+</script>
+
+</body>
+</html>
