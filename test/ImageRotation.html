@@ -9,12 +9,13 @@ body{
     margin:0;
     background:transparent;
     overflow:hidden;
-    font-family:'Segoe UI',sans-serif;
+    font-family:'Arial Black','Segoe UI',sans-serif;
 }
 
 
-#container{
+/* MAIN CONTAINER */
 
+#container{
     position:absolute;
     right:30px;
     top:30px;
@@ -28,104 +29,110 @@ body{
     justify-content:flex-start;
 
     color:white;
-
 }
 
 
+/* GIFT IMAGE */
 
 #giftImage{
-
     width:220px;
     height:220px;
 
     object-fit:contain;
-
     flex-shrink:0;
 
     animation:float 2s ease-in-out infinite;
-
 }
 
 
+/* TEXT OVER THE IMAGE */
 
 #action{
 
-    margin-top:2px;
+    position:absolute;
+
+    top:170px;
+    left:0;
 
     width:300px;
-    height:60px;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-size:32px;
+    font-family:'Arial Black','Segoe UI',sans-serif;
+
+    font-size:27px;
     font-weight:900;
 
-    letter-spacing:1px;
+    /* Makes the letters feel wider */
+    transform:scaleX(1.15);
 
-    text-shadow:
-    0 0 4px #000,
-    0 0 8px #000,
-    0 0 12px #000,
-    0 0 18px rgba(255,255,255,0.4);
+    letter-spacing:0.5px;
 
     text-align:center;
 
-    line-height:1.1;
+    line-height:1.05;
+
+    padding:0 5px;
+
+    box-sizing:border-box;
+
+    /* Strong readable outline */
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+         0 0 5px #000,
+         0 0 10px #000,
+         0 0 16px rgba(0,0,0,0.9);
+
+    z-index:10;
 
 }
 
 
+/* FADE / POP */
 
 .fade{
-
-    animation:fade 1s ease;
-
+    animation:fade 0.7s ease;
 }
-
 
 
 @keyframes fade{
 
     0%{
-
         opacity:0;
-
         transform:scale(.85);
-
     }
 
+    60%{
+        opacity:1;
+        transform:scale(1.04);
+    }
 
     100%{
-
         opacity:1;
-
         transform:scale(1);
-
     }
 
 }
 
 
+/* FLOATING GIFT */
 
 @keyframes float{
 
     0%,100%{
-
         transform:translateY(0);
-
     }
 
-
     50%{
-
         transform:translateY(-8px);
-
     }
 
 }
-
 
 </style>
 
@@ -142,7 +149,6 @@ body{
     <div id="action"></div>
 
 </div>
-
 
 
 <script>
@@ -179,13 +185,13 @@ action:"TNT قنبلة"
 image:"rosa.png",
 action:"Pearls & Rods"
 },
-    
+
 
 {
 image:"perfume.png",
 action:"Random Chest صندوق عشواءي"
 },
-    
+
 
 {
 image:"doughnut.png",
@@ -197,8 +203,8 @@ action:"Random PIT حفرة"
 image:"LoveGlasses.png",
 action:"Diamond Loot"
 },
-   
-    
+
+
 {
 image:"hearts.png",
 action:"No Movement 20 Sec"
@@ -216,7 +222,7 @@ image:"Manifesting.png",
 action:"OP Loot/Armour"
 },
 
-    
+
 {
 image:"monmey gun.png",
 action:"1000x TNT & ARROWS RAIN"
@@ -228,57 +234,50 @@ image:"Galaxy.png",
 action:"Death Pit حفرة الموت"
 }
 
-    
-];
 
+];
 
 
 let current = 0;
 
 
-
 function updateGift(){
 
+    const gift = gifts[current];
 
-const gift = gifts[current];
-
-
-const img = document.getElementById("giftImage");
-
-const text = document.getElementById("action");
-
-const container = document.getElementById("container");
+    const img = document.getElementById("giftImage");
+    const text = document.getElementById("action");
+    const container = document.getElementById("container");
 
 
+    /* Restart animation */
 
-container.classList.remove("fade");
+    container.classList.remove("fade");
 
-void container.offsetWidth;
-
-
-
-img.src = gift.image;
-
-text.textContent = gift.action;
+    void container.offsetWidth;
 
 
+    /* Update */
 
-container.classList.add("fade");
+    img.src = gift.image;
+    text.textContent = gift.action;
 
 
+    /* Play animation */
 
-current = (current + 1) % gifts.length;
+    container.classList.add("fade");
 
+
+    /* Next gift */
+
+    current = (current + 1) % gifts.length;
 
 }
 
 
-
 updateGift();
 
-
 setInterval(updateGift,5000);
-
 
 
 </script>
